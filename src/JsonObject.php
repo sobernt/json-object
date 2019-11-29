@@ -27,7 +27,6 @@ class JsonObject implements JsonSerializable
      */
     public function __construct($json=null,$max_depth=255)
     {
-        $this->max_depth = $max_depth;
         $this->cache=[];
         $this->setDefaultFormatter();
 
