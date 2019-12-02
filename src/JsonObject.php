@@ -86,7 +86,6 @@ class JsonObject implements JsonSerializable
     public function __get($name)
     {
         if(array_key_exists($name,$this->cache)){
-            var_dump($this->cache[$name]);
             return $this->cache[$name];
         }else{
             throw new InvalidArgumentException("structure element not found.",404);
