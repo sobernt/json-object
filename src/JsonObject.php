@@ -4,6 +4,7 @@ use DateTime;
 use JsonSerializable;
 use sobernt\JsonObject\Exceptions\InvalidArgumentException;
 use sobernt\JsonObject\Exceptions\JsonException;
+use sobernt\JsonObject\Exceptions\NullPointerException;
 
 
 /**
@@ -82,10 +83,14 @@ class JsonObject implements JsonSerializable
      * @param $name - name of property
      * @return mixed|null - php primitive, object or other, by property
      * @throws InvalidArgumentException - if argument non't in json structure
+     * @throws NullPointerException - if argument has null value
      */
     public function __get($name)
     {
         if(array_key_exists($name,$this->cache)){
+            if(is_null($this->cache[$name])){
+                throw new NullPointerException("Property $name is null.");
+            } else
             return $this->cache[$name];
         }else{
             throw new InvalidArgumentException("structure element not found.",404);
