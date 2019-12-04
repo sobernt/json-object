@@ -149,8 +149,11 @@ class JsonObject implements JsonSerializable
     }
 
     private function setDefaultFormatter(){
-        $this->setFormatter(function(string $data,string $name=null)
+        $this->setFormatter(function($data,string $name=null)
     {
+        if(is_null($data)){
+            return null;
+        }
         if(preg_match("/^[0-9]{1,19}$/",$data)){
             return intval($data);
         }

@@ -20,7 +20,9 @@ require("vendor/autoload.php");
          \"testobject\":{
                  \"testobjectkey\": \"testobjectval\",
                  \"testobjectintkey\": \"1\"
-        }
+        },
+        \"nulval\":null
+        
     }");
     var_dump($obj);
     echo("\ntestkey:");
@@ -45,6 +47,12 @@ require("vendor/autoload.php");
     echo("\nfilter testcompositearray[1].testcompositearray2key:");
     var_dump($obj->filter("testcompositearray[1].testcompositearray2key"));
 
+    echo("\nnull pointer:");
+    try{
+        var_dump($obj->nulval);
+    }catch (\sobernt\JsonObject\Exceptions\NullPointerException $e){
+        var_dump($e);
+    }
 
     try{
         var_dump($obj->tst);
