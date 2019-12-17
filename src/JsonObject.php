@@ -154,22 +154,11 @@ class JsonObject implements JsonSerializable
         if(is_null($data)){
             return null;
         }
-        if(preg_match("/^[0-9]{1,19}$/",$data)){
+        if(is_int($data)){
             return intval($data);
         }
         if(is_double($data)){
             return doubleval($data);
-        }
-        //data in format YYYY-MM-DD OR YYYY-MM-DD hh:mm:ss
-        if(preg_match('/^([\d]{4})-([\d]{1,2})-([\d]{1,2}) (([\d]{1,2}):([\d]{1,2}):([\d]{1,2}))?$/', $data, $data_matches)){
-            $date = new DateTime();
-            $date->setDate($data_matches[1],$data_matches[2],$data_matches[3]);
-
-            if(sizeof($data_matches)==7){//with time
-                $date->setTime($data_matches[5],$data_matches[6],$data_matches[7]);
-            }
-
-            return $date;
         }
 
         return $data;
